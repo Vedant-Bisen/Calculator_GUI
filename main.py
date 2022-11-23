@@ -4,33 +4,33 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 
 class Mainwindow(QMainWindow):
     def __init__(self):
-        super(Mainwindow,self).__init__()
-        self.setGeometry(1400, 300, 400, 500)
-        self.setWindowTitle("Calculator")
-        self.initUI()
-        self.buttons()
+        super(Mainwindow,self).__init__()                           #Initialising new window
+        self.setGeometry(1400, 300, 400, 500)                       #Setting window geometry
+        self.setWindowTitle("Calculator")                           #Setting window title
+        self.initUI()                                               #Calling init UI    
+        self.buttonsUI()                                            #Calling buttons UI
 
     def initUI(self):
-        self.textbox = QtWidgets.QLabel(self)
+        self.textbox = QtWidgets.QLabel(self)                       #Creating textbox to show output
         self.textbox.setGeometry(100, 200, 200, 50)
-        self.textbox.setStyleSheet("border : 1px solid black")
+        self.textbox.setStyleSheet("border : 1px solid black")      #1px border to textbox
         self.textbox.setText("0")
 
-        self.acc = 0
-        self.flag1 = 0
-        self.flag2 = 0
-        self.flag3 = ""
+        self.acc = 0                                                #Creating acc
+        self.flag1 = 0                                              #flag1 to store values when writing numbers
+        self.flag2 = 0                                              #flag2 to store values when operants are applied
+        self.flag3 = ""                                             #flag3 to store values of the prev operant 
 
-    def buttons(self):
-        self.button0 = QtWidgets.QPushButton(self)
-        self.button0.setGeometry(100, 400, 50, 50)
-        self.button0.setText("0")
-        self.button0.clicked.connect(self.but0)
+    def buttonsUI(self):
+        self.button0 = QtWidgets.QPushButton(self)                  #Creating button  
+        self.button0.setGeometry(100, 400, 50, 50)                  #Settign geometry to button
+        self.button0.setText("0")                                   #Setting text to button 
+        self.button0.clicked.connect(self.but0)                     #Connecting button to function
 
-        self.button1 = QtWidgets.QPushButton(self)
-        self.button1.setGeometry(100, 350, 50, 50)
-        self.button1.setText("1")
-        self.button1.clicked.connect(self.but1)
+        self.button1 = QtWidgets.QPushButton(self)                                 
+        self.button1.setGeometry(100, 350, 50, 50)                  
+        self.button1.setText("1")                                   
+        self.button1.clicked.connect(self.but1)                     
 
         self.button2 = QtWidgets.QPushButton(self)
         self.button2.setGeometry(150, 350, 50, 50)
@@ -103,10 +103,10 @@ class Mainwindow(QMainWindow):
         self.button_clear.clicked.connect(self.but_clear)
 
     def but0(self):
-        self.flag1 = str(self.acc)+str(0)
-        self.acc = int(self.flag1)
-        self.flag1 = 0
-        self.textbox.setText(str(self.acc))
+        self.flag1 = str(self.acc)+str(0)                           #Setting first flag to value in acc plus the cliked value
+        self.acc = int(self.flag1)                                  #converting acc to the int of flag value added
+        self.flag1 = 0                                              #Setting flag to 0
+        self.textbox.setText(str(self.acc))                         #Displaying on textBox
 
     def but1(self):
         self.flag1 = str(self.acc)+str(1)
