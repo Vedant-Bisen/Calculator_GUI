@@ -1,4 +1,4 @@
-import sys
+import sys,math
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
@@ -20,6 +20,7 @@ class Mainwindow(QMainWindow):
         self.flag1 = 0                                              #flag1 to store values when writing numbers
         self.flag2 = 0                                              #flag2 to store values when operants are applied
         self.flag3 = ""                                             #flag3 to store values of the prev operant 
+        self.flag4 = "close"
 
     def buttonsUI(self):
         self.button0 = QtWidgets.QPushButton(self)                  #Creating button  
@@ -101,6 +102,21 @@ class Mainwindow(QMainWindow):
         self.button_clear.setGeometry(100, 450, 200, 50)
         self.button_clear.setText("Clear")
         self.button_clear.clicked.connect(self.but_clear)
+        
+        self.button_sin = QtWidgets.QPushButton(self)                                 
+        self.button_sin.setGeometry(50, 250, 50, 50)                  
+        self.button_sin.setText("sin")                                   
+        self.button_sin.clicked.connect(self.but_sin)
+        
+        self.button_cos = QtWidgets.QPushButton(self)                                 
+        self.button_cos.setGeometry(50, 300, 50, 50)                  
+        self.button_cos.setText("cos")                                   
+        self.button_cos.clicked.connect(self.but1) 
+        
+        self.button_tan = QtWidgets.QPushButton(self)                                 
+        self.button_tan.setGeometry(50, 350, 50, 50)                  
+        self.button_tan.setText("tan")                                   
+        self.button_tan.clicked.connect(self.but1)
 
     def but0(self):
         self.flag1 = str(self.acc)+str(0)                           #Setting first flag to value in acc plus the cliked value
@@ -194,6 +210,36 @@ class Mainwindow(QMainWindow):
             self.flag3 = "div"
             self.acc = 0
 
+    def but_clear(self):
+        self.textbox.setText(" ")
+        self.acc = 0
+        self.flag1 = 0
+        self.flag2 = 0
+        self.flag3 = ""
+
+    def but_sin(self):
+        self.but_enter()
+        self.flag4 = "open"
+        self.flag2 = float(math.sin(self.flag2))
+        self.flag3 = "sin"
+    
+    def but_cos(self):
+        self.but_enter()
+        self.flag3 = float(math.cos(self.flag2))
+        self.flag3 = "cos"
+        
+    def but_tan(self):
+        self.but_enter()
+        self.flag3 = float(math.tan(self.flag3))
+        self.flag3 = "tan"
+
+    def but_clear(self):
+        self.textbox.setText(" ")
+        self.acc = 0
+        self.flag1 = 0
+        self.flag2 = 0
+        self.flag3 = ""
+       
     def but_enter(self):
         if self.flag3 == "add":
             self.flag2 += self.acc
@@ -217,17 +263,23 @@ class Mainwindow(QMainWindow):
                 self.flag2 /= self.acc
                 self.textbox.setText(str(self.flag2))
                 self.flag3 = ""
+                
+        elif self.flag3 == "sin":
+            self.textbox.setText(str(self.flag2))
+            self.flag3 = ""
+        
+        elif self.flag3 == "cos":
+            self.textbox.setText(str(self.flag2))
+            self.flag3 = ""
+            
+        elif self.flag3 == "tan":
+            self.textbox.setText(str(self.flag2))
+            self.flag3 = ""
 
         else:
             self.flag2 = self.acc
-        
-    def but_clear(self):
-        self.textbox.setText(" ")
-        self.acc = 0
-        self.flag1 = 0
-        self.flag2 = 0
-        self.flag3 = ""
 
+            
 def main():
     app = QApplication(sys.argv)
     win = Mainwindow()
